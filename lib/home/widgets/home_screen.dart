@@ -1,3 +1,4 @@
+import 'package:async_shop/home/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -7,24 +8,21 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Home')),
-      body: GridView.builder(
-        itemCount: 6,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 16,
-          crossAxisSpacing: 16,
-          childAspectRatio: 2 / 3,
+      body: RefreshIndicator(
+        onRefresh: () async {},
+        child: GridView.builder(
+          padding: EdgeInsets.all(12),
+          itemCount: 6,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
+            childAspectRatio: 2 / 3,
+          ),
+          itemBuilder: (context, index) {
+            return ProductCard();
+          },
         ),
-        itemBuilder: (context, index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(child: Image.network('', fit: BoxFit.cover)),
-              Text('Title'),
-              Text('\$99.99'),
-            ],
-          );
-        },
       ),
     );
   }
